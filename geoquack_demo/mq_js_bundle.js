@@ -11,6 +11,15 @@ async function copyToClipboard(text) {
     }
 }
 
+// window.copyToClipboard = async function (text) {
+//     try {
+//         await navigator.clipboard.writeText(text);
+//         console.log('Text copied to clipboard:', text);
+//     } catch (err) {
+//         console.error('Failed to copy text: ', err);
+//     }
+// };
+
 async function pasteFromClipboard() {
     try {
         const text = await navigator.clipboard.readText();
