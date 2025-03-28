@@ -1,5 +1,24 @@
 <html lang="en">
 
+<script>
+    async function copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+        }
+    }
+
+    async function pasteFromClipboard() {
+        try {
+            return await navigator.clipboard.readText();
+        } catch (err) {
+            console.error('Failed to read clipboard contents: ', err);
+            return "";
+        }
+    }
+</script>
+
 <head>
     <meta charset="utf-8">
     <title>GeoQuack</title>
@@ -17,25 +36,6 @@
             z-index: 0;
         }
     </style>
-
-    <script>
-        async function copyToClipboard(text) {
-        try {
-            await navigator.clipboard.writeText(text);
-        } catch (err) {
-            console.error('Failed to copy text: ', err);
-        }
-        }
-    
-        async function pasteFromClipboard() {
-        try {
-            return await navigator.clipboard.readText();
-        } catch (err) {
-            console.error('Failed to read clipboard contents: ', err);
-            return "";
-        }
-        }
-    </script>
 </head>
 
 <body>
