@@ -29,4 +29,4 @@ window.copyToClipboard = async function (text) {
 //         console.error('Failed to read clipboard contents: ', err);
 //         return "";
 //     }
-}
+//}
