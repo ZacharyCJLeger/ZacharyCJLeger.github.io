@@ -1,8 +1,27 @@
 <html lang="en">
 
+<script>
+    async function copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+        }
+    }
+
+    async function pasteFromClipboard() {
+        try {
+            return await navigator.clipboard.readText();
+        } catch (err) {
+            console.error('Failed to read clipboard contents: ', err);
+            return "";
+        }
+    }
+</script>
+
 <head>
     <meta charset="utf-8">
-    <title>FIX TEST 1</title>
+    <title>GeoQuack</title>
     <style>
         html,
         body,
@@ -13,7 +32,7 @@
             height: 100%;
             overflow: hidden;
             position: absolute;
-            background: black;
+            background: rgb(16, 39, 5);
             z-index: 0;
         }
     </style>
