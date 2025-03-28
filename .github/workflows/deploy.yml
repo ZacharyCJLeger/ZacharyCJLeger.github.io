@@ -9,6 +9,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.3
     permissions:
       contents: write
 
