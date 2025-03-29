@@ -41,8 +41,38 @@
 							</div>
 							<p></p>
 							<ul class="actions">
-								<li><a href="geoquack versions/GeoQuack - Windows.exe" download="GeoQuack.exe" class="button primary icon solid fa-download">v1.0.2</a></li>
+								<li><a id="download-link" href="geoquack versions/GeoQuack - Windows.exe" download="GeoQuack.exe" class="button primary icon solid fa-download">Download v1.0.2 for Windows</a></li>
 							</ul>
+
+							<script>
+								const selectElement = document.getElementById('demo-category');
+								const downloadLink = document.getElementById('download-link');
+							  
+								selectElement.addEventListener('change', function () {
+								  const selectedOption = selectElement.value;
+								  const version = 'v1.0.2';
+								  let platformName = '';
+							  
+								  switch (selectedOption) {
+									case 'windows':
+									  downloadLink.href = `geoquack versions/GeoQuack.exe`;
+									  downloadLink.download = `GeoQuack-${version}-Windows.exe`;
+									  platformName = 'Windows';
+									  break;
+									case 'macos':
+									  downloadLink.href = `geoquack versions/GeoQuack.zip`;
+									  downloadLink.download = `GeoQuack-${version}-macOS.zip`;
+									  platformName = 'macOS';
+									  break;
+									case 'linux':
+									  downloadLink.href = `geoquack versions/GeoQuack - Linux.AppImage`;
+									  downloadLink.download = `GeoQuack-${version}-Linux.AppImage`;
+									  platformName = 'Linux';
+									  break;
+								  }
+								  downloadLink.textContent = `Download ${version} for ${platformName}`;
+								});
+							  </script>
 						</div>
 					</section>
 
