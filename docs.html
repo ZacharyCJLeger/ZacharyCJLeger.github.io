@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>GeoQuack - Documentation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" href="favicon.svg" type="image/svg+xml">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a href="index.html" class="title">GeoQuack</a>
+				<nav>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">Documentation</h1>
+
+							<h2 class="major">How to Install</h2>
+							<p>To install, simply select your operating system and click the download button. The executable should download and you shoud be able to run it directly on your computer.</p>
+
+
+
+
+							<h2 class="major">Layout</h2>
+							<center>
+							<span class="image"><img src="images/GQScreenshot.png" style="width: 55vw; min-width: 330px;" alt="" /></span>
+							</center>
+							<p>This is the program you will see upon load-up (without the green numbers, of course). Here's is a basic run-down of what you are seeing:
+								<ol>
+									<li>This is the options menu button. There, you will see a list of options for delete elements in your space. This button is for convenience, you can also do this via commands.</li>
+									<li>This is the command line history. Here, you will see the history of commands you executed.</li>
+									<li>This is the 3D visualization space. Here, you will see the drawings you create. By clicking on it, you can use your mouse, the WASD keys, the space button and the control button to move around the 3D environment.</li>
+									<li>This is the command bar. Here, you can type in your commands. Pressing enter will cause them to execute.</li>
+									<li>Here is the Send button. Instead of pressing enter to send your commands, you can press this instead.</li>
+									<li>This section is your environment function section. Here, the functions (and variables) you create are stored and displayed. More details on this section below.</li>
+								</ol>
+							</p>
+
+
+							<h2 class="major">Elements and Operations</h2>
+							All elements in GeoQuack are either real numbers (for example <code>1.23</code>) or blades (for example <code>e₁</code> or <code>e₀₁</code>).
+							Below is a table of operations the user can perform alongside their keyboard shortcut and their mathematical meaning. Binary operations are written as infixes, with higher precedence for products first. Unary operations are prefixes and take higher than any binary operation. 
+
+							<div class="table-wrapper">
+								<table class="alt">
+									<thead>
+										<tr>
+											<th>Mathematical Meaning</th>
+											<th>Operation Symbol</th>
+											<th>Operation Shortcut</th>
+											<th>Example</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Addition</td>
+											<td>+</td>
+											<td><code>+</code></td>
+											<td><code>1 + 2</code></td>
+										</tr>
+										<tr>
+											<td>Subtraction</td>
+											<td>-</td>
+											<td><code>-</code></td>
+											<td><code>1 - 2</code></td>
+										</tr>
+										<tr>
+											<td>Geometric Product</td>
+											<td>Concanation or ⟑</td>
+											<td><code>^.</code></td>
+											<td><code>23⟑e₀</code></td>
+										</tr>
+										<tr>
+											<td>Wedge (exterior product)</td>
+											<td>∧</td>
+											<td><code>^</code></td>
+											<td><code>e₁∧e₀</code></td>
+										</tr>
+										<tr>
+											<td>Geometric Antiproduct</td>
+											<td>⟇</td>
+											<td><code>v.</code></td>
+											<td><code>e₁⟇e₀</code></td>
+										</tr>
+										<tr>
+											<td>Antiwedge</td>
+											<td>∨</td>
+											<td><code>v</code></td>
+											<td><code>e₁∨e₀</code></td>
+										</tr>
+										<tr>
+											<td>Positive</td>
+											<td>+</td>
+											<td><code>+</code></td>
+											<td><code>+e₀</code></td>
+										</tr>
+										<tr>
+											<td>Negative</td>
+											<td>-</td>
+											<td><code>-</code></td>
+											<td><code>-e₀</code></td>
+										</tr>
+										<tr>
+											<td>Left complement</td>
+											<td>_</td>
+											<td><code>_</code></td>
+											<td><code>_e₀</code></td>
+										</tr>
+										<tr>
+											<td>Right complement</td>
+											<td>‾</td>
+											<td><code>__</code></td>
+											<td><code>‾e₀</code></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<h2 class="major">Managing Functions</h2>
+							
+							Variables in GeoQuack are simply functions without parameters (i.e. constant functions). To create your first function, try typing
+							<code> [a] := e₁+e₀</code>
+							into the command bar (the values <code>e1</code> and <code>e0</code> will automatically convert to <code>e₁</code> and <code>e₀</code> upon typing). If you do not provide a name for the function (for example, by simply running <code>e₁+e₀</code>), an auto-matically generated function name will be generated of the form <code>[ans{number}]</code>. Auto-generated function names are only possible for constant functions.
+
+
+							<h3 class="major">The Environment Function Section</h3>
+
+							After sending an assignment command in GeoQuack, it will create the following result:
+							<center>
+								<span class="image"><img src="images/GQVariableScreenshot.png" style="width: 55vw; min-width: 330px;" alt="" /></span>
+							</center>
+							<p>On the left-hand side, we see the command history displaying your command followed by the outcome of your command. The function is then stored in the environment on the right-hand side. Note that there are three types of variables in GeoQuack:
+							<ol>
+								<li>⟀: Algebra elements</li>
+								<li>⏿: Drawings</li>
+								<li>𝔹: Booleans</li>
+							</ol>
+							Clicking on each button in the environment function section will display environment functions of that type.</p>
+
+
+
+							<h3 class="major">Manipulating Individual Functions</h3>
+							<center>
+								<span class="image"><img src="images/GQFunctionOptions.png" style="width: 20vw; min-width: 50px;" alt="" /></span>
+							</center>
+							For each function in the environment function section, there may be up to three options:
+							<ol>
+								<li>The drop-down button. Clicking this button will display more details on the value of the function</li>
+								<li>The draw button. This will attempt to draw the function if it of a drawable type. Only constant functions (i.e. variables) are drawable.</li>
+								<li>The delete button. This will delete the function from the environment.</li>
+							</ol>
+
+
+							<h2 class="major">Creating Drawings</h2>
+							As described in the previous section, after creating a function, you can draw the function (if it is a constant function) by clicking the draw button in the function environment section. However, this option always stores the resulting drawing in a constant function with an auto-generated name. You can create drawings in the command line by calling 
+							<pre><code>[drawing_name] := draw e₁+e₀</code></pre>
+							or of course, if you wish to draw an environment function 
+							<pre><code>[drawing_name] := draw [function_name]</code></pre>
+							You can specify the colour by provided a 3-tuple
+							<pre><code>[drawing_name] := draw e₁+e₀ (1, 0.2, 0.2)</code></pre>
+							Once you create your drawings, you can move around the 3D space by first clicking on the 3D environment on the right-hand side to enter the environment. Then, by holding and dragging the right mouse button, you can move the camera to look around. To move around, you can use the WASD keys to move forward, left, back and right respectively. You can also use the space key to move up and the left shift key to move down.
+
+							
+							
+
+
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Zachary Leger. All rights reserved.</li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

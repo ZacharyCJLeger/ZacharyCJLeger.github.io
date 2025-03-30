@@ -8,6 +8,10 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+		<link rel="icon" href="favicon.svg" type="image/svg+xml">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<script src="https://tikzjax.com/v1/tikzjax.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -28,16 +32,151 @@
 					<section id="main" class="wrapper">
 						<div class="inner">
 							<h1 class="major">Projective Geometric Algebra</h1>
+							<h2 class="major">Prelude</h2>
+
+							<p>Before I begin describing projective geometric algebra, I would like to advise the reader that this article is only intended as a broad overview of this mathematical model. If you would like to read more about details about geometric algebra or projective geometric algebra, there is a section at the very end on where to read more about this subject.
+							<p>I would also like to advise the reader this model is complex and relatively new. Between different researchers in the field, there must be at least a dozen different products, and at least 8 different types of "dualization". If that weren't enough, even the names and symbols for these products often times differ or overlap between different researchers (I wish I was joking). Needless to say, this field of mathetmatics can be a bit confusing. So, I've tried to keep this article as simple and as neutral as possible. I introduce as few new concepts as I can so that the reader may understand what is being accomplished. Furthermore, I leave out most of the "controversial" stuff except where I'm obligated to.</p>
+
 							<h2 class="major">The Big Picture</h2>
-							<p>((Describe a bit about homogenous coordinates))</p>
-							<p>((put a bit of history of geometric algebra here)) .</p>
+							<p>Linear algebra is a fundamental tool in mathematics and computer science. The word "linear" in linear algebra hints at its significance in geometry. Matrices are algebraic elements which are able to represent all linear transformations in a space. From a geometric perspective, when we refer to a linear transformation, we refer to two things:
+								<ol>
+									<li>Parallel lines remain parallel lines</li>
+									<li>The origin remains at the origin</li>
+								</ol>
+							This is almost what we want to represent geometry, except the restriction of the origin needing to remain at the origin proves to be too much of a restriction. This limitation prevents us from performing translation. Homogenous coordinates were invented to curcumvent this restriction, which I describe in the following <a href="#homogenous" >this section below.</a>
+							</p>
+							
+							<p><b>Exterior algebra</b> is an extension of linear algebra which provides element which can represent subspaces. This addition is useful from a geometric perspective because it allows us to represent surfaces and volumes. <b>Geometric algebra</b> is an additional extension on top of the exterior algebra, which provides us with a  new type of product that allows use the elements from our exterior algebra to perform linear transformations. Finally, <i><b>projective geometric algebra</b></i> is geometric algebra combined with the homogeneous coordinate system in order to be able to perform all rigid body transformations (i.e. linear transformations <i>and</i> translation) using the elements from the exterior algebra.</p>
+
+
 							<p>The goal of <i>projective geometric algebra</i> is to combine homogenous coordinates and geometric algebra into one mathematical model. This mathematical model would be able to represent all orthogonal transformations <i>and</i> translations. In essence, it would allow us to represent all rigid body transformations.</p>
+							
+
+
+
+							<section id="homogenous">
 							<h2 class="major">Homogenous Coordinates</h2>
-							<p>Homogenous coordinates are a system of coordinates in which we extend our vector space by 1 dimension in order to be able to perform translations via matrices. Obviously, performing translation on a vector via vector addition is relatively easy. Consider the vector $\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$</p>
+							<p>Homogenous coordinates are a system of coordinates in which we extend our vector space by 1 dimension in order to be able to perform translations via matrices. Obviously, performing translation on a vector via vector addition is relatively easy. Consider the vector \(
+								\begin{pmatrix}
+								1&
+								2&
+								3
+								\end{pmatrix}^T
+							\), if we want to translate by \(+3\) in the \(e_1\) direction, \(-2\) in the \(e_2\) direction, and \(+4\) in the \(e_3\) direction, we can simply do
+							\[
+								\begin{pmatrix}
+								1&
+								2&
+								3
+								\end{pmatrix}^T
+								+
+								\begin{pmatrix}
+								3&
+								-2&
+								4
+								\end{pmatrix}^T
+							\]
+							to get our result. However, if we want to perform translations via <i>matrices</i>, its clear that a typical 3D coordinate system for a 3D space does not suffice. To see why, consider the zero vector. For any matrix \(M\) we have \(M\vec{0} = \vec{0}\). Thus, we see that no matrix can move the zero vector anywhere else in space. The idea behind homogenous coordinates is to extend our space by 1 dimension and "project" onto a plane in this extra dimension. I think it's more helpful at first to ignore the projection interpretation for now and instead simply think of all of the element existing in a single plane. Here's what I mean: we add an extra dimension to our space and give all of our points the coordinate \(1\) in that extra dimension. Let's call our dimensions \(e_1, e_2\) and \(e_3\) and let's call this extra dimension \(e_p\) (here the \(p\) stands for projective). If we look at just the axes \(e_1\) and \(e_p\), we might have a space populated by red points like this:
+							<center>
+								<script type="text/tikz">
+									\begin{tikzpicture}
+										\draw[gray, thick] (1,-2) -- (1,2);
+										\draw[gray, thick] (-1,-2) -- (-1,2);
+
+										\draw[gray, thick] (-2, 1) -- (2, 1);
+										\draw[gray, thick] (-2, -1) -- (2, -1);
+
+										% Draw x and y axes
+										\draw[->, white, thick] (-2,0) -- (2,0) node[right] {$e_1$};
+										\draw[->, white, thick] (0,-2) -- (0,2) node[above] {$e_p$};
+										\draw[dashed, white, thick] (-2, 1) -- (2, 1);
+
+										% Draw ticks and labels
+										\foreach \x in {-1,1}
+											\draw[white, thick] (\x,0.1) -- (\x,-0.1) node[below] {\x};
+										
+										\foreach \y in {-1,1}
+											\draw[white, thick] (0.1,\y) -- (-0.1,\y) node[below left] {\y};
+
+										% Draw points
+										\filldraw[red] (0.2,1) circle (2pt);
+										\filldraw[red] (-1.1,1) circle (2pt);
+										\filldraw[red] (0.7,1) circle (2pt);
+										\filldraw[red] (1.5,1) circle (2pt);
+									\end{tikzpicture}
+								</script>
+							</center>
+							Now that we've "lifted" everything up into this 4th dimension, we <i>can</i> perform translation. All we need to do is be careful not to move things on or off the \(1e_p\) plane as we perform our transformations. To perform translation, we simply do a sheer. We can see that this transformation is a linear transformation because parallel lines remain parallel lines, and also the origin is still fixed under the transformation. Hence we can perform a sheer like this:
+							<center>
+								<script type="text/tikz">
+									\begin{tikzpicture}
+										\draw[gray, thick] (-2,-2) -- (0,2);
+										\draw[gray, thick] (-1,-2) -- (1,2);
+										\draw[gray, thick] (0,-2) -- (2,2);
+
+										\draw[gray, thick] (-2, 1) -- (2, 1);
+										\draw[gray, thick] (-2, -1) -- (2, -1);
+
+										
+										
+
+										% Draw x and y axes
+										\draw[->, white, thick] (-2,0) -- (2,0) node[right] {$e_1$};
+										\draw[->, white, thick] (0,-2) -- (0,2) node[above] {$e_p$};
+
+										\draw[dashed, white, thick] (-2, 1) -- (2, 1);
+										
+										
+
+										% Draw ticks and labels
+										\foreach \x in {-1,1}
+											\draw[white, thick] (\x,0.1) -- (\x,-0.1) node[below] {\x};
+										
+										\foreach \y in {-1,1}
+											\draw[white, thick] (0.1,\y) -- (-0.1,\y) node[below left] {\y};
+
+										% Draw points
+										\filldraw[red] (0.7,1) circle (2pt);
+										\filldraw[red] (-0.6,1) circle (2pt);
+										\filldraw[red] (1.2,1) circle (2pt);
+										\filldraw[red] (2,1) circle (2pt);
+
+
+
+										\filldraw[green, semitransparent] (-1.1,1) circle (2pt);
+										\draw[->, green, thick, semitransparent] (-1, 1) -- (-0.7, 1);
+									\end{tikzpicture}
+								</script>
+							</center>
+							I've included a green point for comparison to where to point originally was. Since this is a linear transformation, it can be represented by a matrix. Hence, this is how homogenous coordinates allow us to represent translation via matrices.</p>
+
+							<p>
+								There are a couple benefits to being able to perform translations via matrices. It does seems at first like it would be a lot simpler to do vector addition, however, if we are also performing rotations, then there is a performance benefit to doing this. Consider the case where we are alternating between rotations and translations: We want to rotate, then translate, then rotate, then translate, etc. If we insist on using vector addition for translation, then all of these transformations have to be compute in sequence. This is fine for a simple point, since converting to homogenous coordinates and multiplying matrices together isn't much better (actually in this case, it's probably worse). But, if you are computing this same transformation for many points (perhaps even millions, which is often the case), the homogeneous coordinate system starts to be a lot better. We can pre-compute all of our transformations into a single matrix, and then simply apply that matrix to all of our points. So the cost of applying \(k\) transformations to \(n\) points is about the cost of multiplying these \(k\) matrices together and then multiplying that same matrix onto \(n\) points. This is much better that doing \(~k/2\) matrix multiplications for \(n\) points, even if these matrices are smaller. Additionally, the homogeneous coordinate system also makes it very easy to perform perspective transformations, but that is a story for another time.
+							</p>
+
+							</section>
 							
 							<h2 class="major">Exterior Algebra</h2>
+							<p>
+								A useful extension of linear algebra which allows elements to represent <i>linear subspaces</i>. We introduce a new type of product, \(\wedge\), called "the exterior product" or "wedge", which has the properties you would expend for a product (scalars behave as expected, the product distributes, associativity, etc.) except that it doesn't commute (so \(a \wedge b \ne b \wedge a\)). The way that this product is able to create elements which represent subspaces is as such: given the vectors \(v_1\) and \(v_2\), we are able to create the 2-blade \(v_1 \wedge v_2\) which represents the subspace spanned by \(v_1\) and \(v_2\). However, the caveat is that if \(v_1\) and \(v_2\) already span each other (i.e. \(v_1 = \alpha v_2\) for some scalar \(\alpha\)) then this element is actually \(0\). This guarantees that combining \(k\) elements will give an element representing a \(k\)-dimensional subspace, or \(0\) in cases where doing so wouldn't make sense (basically, where there span of the elements can't cover \(k\) dimensions). This might seem magical, but it really simply suffices to define \(\wedge\) as a bilinear product (read: behaves as you'd expect) with the property that for all vectors \(v\), we have \(v \wedge v = 0\). When you define it like this, you can see how
+								\[
+									(v_1 + \alpha v_2) \wedge v2 = v_1 \wedge v_2 + \alpha v_2 \wedge v_2 = v_1 \wedge v_2
+								\]
+								So, you can see how adding any value \(\alpha v_2\) to the first multiplicand doesn't change the final result. In essence, the element represents the span of the space of these two vectors.
+							</p>
+
 							<h2 class="major">Geometric Algebra</h2>
+							<p>
+								Geometric algebra is best viewed as a further extension of the exterior algebra. We create a new product, denoted ⟑ or simply with concatenation, called the geometric product. We will have the property that for any vector \(v\), we have \(vv = \alpha\) for some scalar \(\alpha\). If two vectors ((finish this later)) In a typical 3D Euclidean framework, we define \(e_1^2 = e_2^2 = e_3^2 = 1\). If we do this, then it turns out that this operation allows us to preform rotations fixed at the origin using elements from the exterior algebra we defined earlier. In particular, given elements \(v_1\) and \(v_2\), we can create what's called a "versor" which performs the rotation from \(v_1\) to \(v_2\). So, any element \(E\) from the exterior algebra, we can apply the rotation to it by applying this versor, which will look like this:
+								\[
+									v_2v_1 E v_1^{-1}v_2^{-1}
+								\]
+							</p>
+
 							<h2 class="major">Projective Geometric Algebra</h2>
+							<p>
+								This section is currently under construction.
+							</p>
 						</div>
 					</section>
 
